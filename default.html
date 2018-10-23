@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Page Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font: 13px Helvetica, Arial;
+			display: flex;
+			justify-content: center;
+		}
+
+		.content {
+			width: 50%;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content:flex-start;
+		}
+
+		.http-msg {
+			flex-direction: row;
+			justify-content: space-around;
+			width: 100%;
+			margin: 30px 0;
+		}
+
+		.btn {
+			position: relative;
+    	display: block;
+  	  margin: 13px;
+ 			width: 200px;
+  	  padding: 0;
+	    height: 30px;
+ 	   	overflow: hidden;
+  	  border-width: 0;
+    	outline: none;
+    	border-radius: 2px;
+			box-shadow: 0 1px 4px rgba(0,0,0,.6);
+			align-self: center;
+		}
+
+		.input-http {
+			padding: 10px;
+			margin: 5px 0;
+		}
+
+		span {
+			align-self: center;
+			font-size: 2em;
+		}
+
+		</style>
+</head>
+
+<body>
+	<div class="content">
+		<input id="input-http" class="input-http" type="text" placeholder="Digite um código HTTP">
+		<button id="button-http" class="btn">Gerar imagem!</button>
+		<img id="img-http" class="img-http" src="">
+		<div id="http-msg" class="http-msg"></div>
+	</div>
+	<script>
+		const httpValue = [100, 101, 200,
+			201, 202, 204, 206, 207,
+			300, 301, 302, 303, 304, 305, 307,
+			400, 401, 402, 403, 404, 405, 406, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 420, 421, 422, 423, 424, 425, 426, 429, 431, 444, 450, 451,
+			500, 502, 503, 504, 506, 507, 508, 509, 510, 511, 599];
+
+		document.getElementById('button-http').addEventListener('click', function () {
+			document.getElementById("http-msg").innerText = "";
+			document.getElementById("img-http").src = '';
+			const http = document.getElementById('input-http').value;
+			if (httpValue.includes(Number(http))) {
+				document.getElementById("img-http").src = `https://http.cat/${http}`;
+			}
+			else {
+				const span = document.createElement("span");
+				const node = document.createTextNode('Código HTTP não encontrado!');
+				span.appendChild(node);
+				const div = document.getElementById("http-msg");
+				div.appendChild(span);
+			}
+		}); 
+	</script>
+</body>
+
+</html>
